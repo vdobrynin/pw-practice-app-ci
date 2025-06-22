@@ -19,6 +19,8 @@ export default defineConfig<TestOptions>({
       {
         // Upload to Argos on CI only.
         uploadToArgos: !!process.env.CI,
+        // Set your Argos token (required if not using GitHub Actions)
+        // token:"argos_388a5634fd688a8fed1ad01ee0dd323671",
       },
     ],
     ['json', {outputFile: 'test-results/jsonReport.json'}],
