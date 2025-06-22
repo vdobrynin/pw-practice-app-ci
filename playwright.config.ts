@@ -36,7 +36,7 @@ export default defineConfig<TestOptions>({
   ],
   use: {
     baseURL: 'http://localhost:4200/',
-    globalQaURL: 'https://www.globalsqa.com/demo-site/draganddrop/',
+    // globalQaURL: 'https://www.globalsqa.com/demo-site/draganddrop/',
     // baseURL: process.env.DEV === '1' ? 'http://localhost:4201/'      // #78
     //       : process.env.STAGING == '1' ? 'http://localhost:4202/'
     //       : 'http://localhost:4200/',
