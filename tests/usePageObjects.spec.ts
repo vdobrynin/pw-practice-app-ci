@@ -24,11 +24,13 @@ test('parametrized methods @smoke', async({page}) => {
     const randomEmail = `${randomFullName.replace(' ', '')}${faker.number.int(1000)}@test.com`
 
     await pm.navigateTo().formLayoutsPage()
-    await pm.onFormLayoutsPage().submitUsingTheGrigdFormWithCredentialsAndSelectOption(process.env.USERNAME, process.env.PASSWORD, 'Option 2')
+    await pm.onFormLayoutsPage()
+        .submitUsingTheGridFormWithCredentialsAndSelectOption(process.env.USERNAME, process.env.PASSWORD, 'Option 2')
     // await page.screenshot({path: 'screenshots/formsLayoutsPage.png'})
     // const buffer = await page.screenshot()
     // console.log(buffer.toString('base64'))
-    await pm.onFormLayoutsPage().sumbitInlineFormWithNameEmailAndCheckbox(randomFullName, randomEmail, false)
+    await pm.onFormLayoutsPage()
+        .submitInLineFormWithNameEmailAndCheckbox(randomFullName, randomEmail, false)
     // await page.locator('nb-card', {hasText: "Inline form"}).screenshot({path: 'screenshots/inlineForm.png'})
     await pm.navigateTo().datepickerPage()
     await pm.onDatepickerPage().selectCommonDatePickerDateFromToday(10)

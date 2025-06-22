@@ -2,6 +2,12 @@ import { Page } from "@playwright/test";
 import { HelperBase } from "./helperBase";
 
 export class FormLayoutsPage extends HelperBase{
+    submitInLineFormWithNameEmailAndCheckbox(randomFullName: string, randomEmail: string, arg2: boolean) {
+        throw new Error('Method not implemented.');
+    }
+    submitUsingTheGridFormWithCredentialsAndSelectOption(USERNAME: string, PASSWORD: string, arg2: string) {
+        throw new Error('Method not implemented.');
+    }
 
     constructor(page: Page){
         super(page)
