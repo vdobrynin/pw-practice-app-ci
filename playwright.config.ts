@@ -2,16 +2,22 @@ import { defineConfig, devices } from '@playwright/test';
 import type { TestOptions } from './test-options';
 
 require('dotenv').config();
+const baseURL =
+  process.env.DEV === '1'
+    ? 'http://localhost:4201/'
+    : process.env.STAGING === '1'
+      ? 'http://localhost:4202/'
+      : 'http://localhost:4200/';
 
 export default defineConfig<TestOptions>({
   timeout: 40000,
   // globalTimeout: 60000,
-  expect:{
+  expect: {
     timeout: 2000,
-    toMatchSnapshot: {maxDiffPixels: 50}
+    toMatchSnapshot: { maxDiffPixels: 50 }
   },
-
-  retries: 1,
+  retries: process.env.CI ? 2 : 1,  // --> from 0 change to 1 to make retries for local computer ***
+  // retries: 1,
   reporter: [
     process.env.CI ? ["dot"] : ["list"],
     [
@@ -23,35 +29,32 @@ export default defineConfig<TestOptions>({
         // token:"argos_388a5634fd688a8fed1ad01ee0dd323671",
       },
     ],
-    ['json', {outputFile: 'test-results/jsonReport.json'}],
-    ['junit', {outputFile: 'test-results/junitReport.xml'}],
+    ['json', { outputFile: 'test-results/jsonReport.json' }],
+    ['junit', { outputFile: 'test-results/junitReport.xml' }],
     // ['allure-playwright'],
     ['html']
   ],
-
   use: {
-    globalsQaURL: 'https://www.globalsqa.com/demo-site/draganddrop/',
-    baseURL: process.env.DEV === '1' ? 'http://localhost:4201/'
-          : process.env.STAGING == '1' ? 'http://localhost:4202/'
-          : 'http://localhost:4200/',
-
+    baseURL: 'http://localhost:4200/',
+    globalQaURL: 'https://www.globalsqa.com/demo-site/draganddrop/',
+    // baseURL: process.env.DEV === '1' ? 'http://localhost:4201/'      // #78
+    //       : process.env.STAGING == '1' ? 'http://localhost:4202/'
+    //       : 'http://localhost:4200/',
     trace: 'on-first-retry',
     screenshot: "only-on-failure",
     actionTimeout: 20000,
     navigationTimeout: 25000,
     video: {
       mode: 'off',
-      size: {width: 1920, height: 1080}
+      size: { width: 1920, height: 1080 }
     }
   },
-
   projects: [
     {
       name: 'dev',
-      use: { 
+      use: {
         ...devices['Desktop Chrome'],
-        baseURL: 'http://localhost:4200/'
-       },
+      },
     },
     {
       name: 'chromium',
@@ -59,18 +62,18 @@ export default defineConfig<TestOptions>({
     {
       name: 'firefox',
       use: {
-         browserName: 'firefox',
-         video: {
+        browserName: 'firefox',
+        video: {
           mode: 'off',
-          size: {width: 1920, height: 1080}
+          size: { width: 1920, height: 1080 }
         }
-        }
+      }
     },
     {
       name: 'pageObjectFullScreen',
       testMatch: 'usePageObjects.spec.ts',
       use: {
-        viewport: {width: 1920, height: 1080}
+        viewport: { width: 1920, height: 1080 }
       }
     },
     {
@@ -81,7 +84,6 @@ export default defineConfig<TestOptions>({
       }
     }
   ],
-
   webServer: {
     command: 'npm run start',
     url: 'http://localhost:4200/',

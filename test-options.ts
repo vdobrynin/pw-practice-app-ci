@@ -3,13 +3,13 @@ import { PageManager } from '../pw-practice-app/page-objects/pageManager'
 
 
 export type TestOptions = {
-    globalsQaURL: string
+    globalQaURL: string
     formLayoutsPage: string
     pageManager: PageManager
 }
 
 export const test  = base.extend<TestOptions>({
-    globalsQaURL: ['', {option: true}],
+    globalQaURL: ['', {option: true}],
 
     formLayoutsPage: async({page}, use) => {
         await page.goto('/')

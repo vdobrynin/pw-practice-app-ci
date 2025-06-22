@@ -19,7 +19,8 @@ test.describe('Form Layouts page @block', () => {
         if(testInfo.retry){
             //do something
         }
-        const usingTheGridEmailInput = page.locator('nb-card', {hasText: "Using the Grid"}).getByRole('textbox', {name: "Email"})
+        const usingTheGridEmailInput = page.locator('nb-card', { hasText: "Using the Grid" })
+            .getByRole('textbox', { name: "Email" })
 
         await usingTheGridEmailInput.fill('test@test.com')
         await usingTheGridEmailInput.clear()

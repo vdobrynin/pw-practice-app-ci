@@ -3,9 +3,7 @@ import { NavigationPage } from '../page-objects/navigationPage'
 import { FormLayoutsPage } from '../page-objects/formLayoutsPage'
 import { DatepickerPage } from '../page-objects/datepickerPage'
 
-
 export class PageManager{
-
     private readonly page: Page
     private readonly navigationPage: NavigationPage
     private readonly formLayoutsPage: FormLayoutsPage
@@ -29,5 +27,4 @@ export class PageManager{
     onDatepickerPage(){
         return this.datepickerPage
     }
-
 }
